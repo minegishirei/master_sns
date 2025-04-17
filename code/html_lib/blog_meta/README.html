@@ -1,0 +1,234 @@
+
+
+## 🥇 プログラミング言語ランキング Flamevalue
+
+各プログラミング言語を特定の五項目から評価しランキング化するサイトです。
+**プログラミング言語からフレームワークにインフラ、開発手法に至るまでエンジニアリングに関わる全てのスキルをスコアリングしています。**
+
+学ぶべきプログラミング言語の選択にご活用ください。
+
+
+## 🥇 プログラミング言語ランキング
+
+{% for item in FLAMEWORKDICT %}
+<a href="{{ item.page_link}}">
+<div class="row">
+	<!-- Area Chart -->
+	<div class="col-xl-12 col-lg-7">
+		<div class="card mb-4" style="border: 1px solid black;">
+			<!-- Card Header - Dropdown -->
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">{{ item.name }} <br>{{ item.stars }}</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body">
+				<div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+					<!--                               
+					<canvas id="myAreaChart" style="display: block; height: 320px; width: 571px;" width="1142" height="640" class="chartjs-render-monitor"></canvas>
+					-->
+
+					<div class="row">
+						<!-- Area Chart -->
+						<div class="col-xl-6 col-lg-6">
+							<canvas id="abilityChart-{{ item.name }}" width="350" height="250"></canvas>
+						</div>
+
+						<div class="col-xl-6 col-lg-6">
+							<table style="border:none;">
+								<tr>
+									<td>
+										下限年収
+									</td>
+									<td>
+										{{item.basic["money"] }} <br>万円 / 年
+									</td>
+								</tr>
+								<tr>
+									<td>
+										上限年収
+									</td>
+									<td>
+										{{ item.basic["overtime"] }} <br>万円 / 年
+									</td>
+								</tr>
+								<tr>
+									<td>
+										フォロワー数(Qiita)
+									</td>
+									<td>
+										{{ item.basic["qiita_score"] }} 人
+									</td>
+								</tr>
+								<tr>
+									<td>
+										リモート率
+									</td>
+									<td>
+										{{ item.basic["remote"] }} %
+									</td>
+								</tr>
+								<tr>
+									<td>
+										求人件数
+									</td>
+									<td>
+										{{ item.basic["count"] }} 件
+									</td>
+								</tr>
+							</table>
+						</div>
+
+
+						<div class="col-xl-12 col-lg-12">
+							<p>
+								{{ item.md_value }}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</a>
+
+
+
+<script>
+	var backgroundColor = "#1ABB9C" // Green
+	var backgroundGray = 'rgba(33, 37, 41, 0.3)'
+	var label_colors = {
+		"money" :"#00204a",
+		"overtime" : "#1ABB9C",
+		"qiita_score" : "#005792",
+		"remote" : "#00bbf0",
+		"count" : "#42b883"
+	}
+	// ボタンをクリック
+		labels = ['100万', '200万', '300万','400万', '500万', '600万', '700万', '800万', '900万', '1000万']
+
+		var LABEL_MASTER = [
+			{
+				"key" : "money",
+				"name" : "下限年収"
+			},
+			{
+				"key" : "overtime",
+				"name" : "上限年収"
+			},
+			{
+				"key" : "qiita_score",
+				"name" : "フォロワー数(Qiita)"
+			},
+			{
+				"key" : "remote",
+				"name" : "リモート率"
+			},
+			{
+				"key" : "count",
+				"name" : "求人件数"
+			}
+		]
+		var labelname = "{{ item.name }}"
+		var score_100 = {{ item.score }}
+		var data = LABEL_MASTER.map((row)=>( Math.round(score_100[row.key]) *20 ))
+		var labels = LABEL_MASTER.map((row)=>row.name)
+
+		var ctx = document.getElementById("abilityChart-{{ item.name }}");
+		var myRadarChart = new Chart(ctx, {
+			type: 'radar', 
+			data: { 
+				labels: labels,
+				datasets: [{
+					label: labelname,
+					data: data,
+					backgroundColor: backgroundGray,
+					//borderColor: backgroundColor,
+					borderColor: '#1ABB9C',
+					borderWidth: 1
+				}],
+				color: "rgba(33, 37, 41, 0.3)",
+			},
+			options: {
+				elements: {
+					line: {
+						borderWidth: 3
+					}
+				},
+				maintainAspectRatio: false,
+				scale: {
+					ticks: {
+						// 最小値の値を0指定
+						beginAtZero: true,
+						min: 0,
+            			stepSize: 20,
+						max: 100,
+						//背景色
+						backgroundColor: 'snow',
+						//グリッドライン
+						grid: {
+						color: '#1ABB9C',
+						},
+						//アングルライン
+						angleLines: {
+						color: '#1ABB9C',
+						},
+						//各項目のラベル
+						pointLabels: {
+						color: '#1ABB9C',
+						},
+					},
+				}
+			}
+		});
+</script>
+
+
+
+{% endfor %}
+
+
+
+
+<style>
+.card-subtitle, .card-title {
+    font-weight: 400;
+}
+.card-title {
+    font-size: .875rem;
+    color: #495057;
+}
+.card {
+    margin-bottom: 24px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: initial;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.card-header:first-child {
+    border-radius: .25rem .25rem 0 0;
+}
+.card-header {
+    border-bottom-width: 1px;
+}
+.pb-0 {
+    padding-bottom: 0!important;
+}
+.card-header {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 0 solid transparent;
+}
+</style>

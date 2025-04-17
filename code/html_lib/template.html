@@ -1,0 +1,470 @@
+
+
+
+
+
+<div class="row">
+
+	<!-- Earnings (Monthly) Card Example -->
+
+	<!-- Pending Requests Card Example -->
+	<div class="col-xl-6 col-md-6 mb-4">
+		<div class="card border-left-warning shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+
+						<div class="row">
+							<!-- Pending Requests Card Example -->
+							<div class="col-xl-5 col-md-5">
+								<div class="col mr-2">
+									<img src="{{ image }}" style="max-width: 80px;"/>
+								</div>
+							</div>
+							<div class="col-xl-7 col-md-7">
+								<div class="text-xs text-uppercase mb-1">
+									{{name}} <br>  おすすめ度</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800 text-warning"> {{ stars }} </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-comments fa-2x text-gray-300"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="col-xl-6 col-md-6 mb-4">
+		<div class="card border-left-primary shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs text-uppercase mb-1">
+							推定市場年収</div>
+						<div class="h4 mb-0 font-weight-bold text-success text-gray-800">{{ basic["money"] }}<small
+								class="text-dark h6">万円/年 ~ </small>{{ basic["overtime"] }}<small
+								class="text-dark h6">万円/年</small> </div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-calendar fa-2x text-gray-300"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
+
+<div class="row">
+
+	<!-- Earnings (Monthly) Card Example -->
+	<div class="col-xl-6 col-md-6 mb-6">
+		<div class="card border-left-success shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs font-weight-bold primary-text text-uppercase mb-1">
+							求人件数</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800">{{ basic["count"] }} 件</div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Earnings (Monthly) Card Example -->
+	<div class="col-xl-6 col-md-6 mb-6">
+		<div class="card border-left-info shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs font-weight-bold text-info  mb-1">リモート普及率
+						</div>
+						<div class="row no-gutters align-items-center">
+							<div class="col-auto">
+								<div class="h5 mb-0 mr-3 font-weight-bold text-uppercase text-gray-800">{{ basic["remote"] }}%</div>
+							</div>
+							<div class="col">
+								<div class="progress progress-sm mr-2">
+									<div class="progress-bar bg-info" role="progressbar"
+										style="width: {{ basic[" remote"] }}%" aria-valuenow="50"
+										aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+
+<h2>{{ name }}の評価 </h2>
+
+
+<div class="row">
+	<!-- Area Chart -->
+	<div class="col-xl-12 col-lg-7">
+		<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body">
+				<div class="chart-area">
+					<div class="chartjs-size-monitor">
+						<div class="chartjs-size-monitor-expand">
+							<div class=""></div>
+						</div>
+						<div class="chartjs-size-monitor-shrink">
+							<div class=""></div>
+						</div>
+					</div>
+					<!--                               
+					<canvas id="myAreaChart" style="display: block; height: 320px; width: 571px;" width="1142" height="640" class="chartjs-render-monitor"></canvas>
+					-->
+
+					<div class="row">
+						<!-- Area Chart -->
+						<div class="col-xl-6 col-lg-6">
+							<canvas id="abilityChart" width="350" height="250"></canvas>
+						</div>
+
+						<div class="col-xl-6 col-lg-6">
+							<table style="border:none;">
+								<tr>
+									<td>
+										下限年収
+									</td>
+									<td>
+										{{basic["money"] }} <br>万円 / 年
+									</td>
+								</tr>
+								<tr>
+									<td>
+										上限年収
+									</td>
+									<td>
+										{{ basic["overtime"] }} <br>万円 / 年
+									</td>
+								</tr>
+								<tr>
+									<td>
+										フォロワー数(Qiita)
+									</td>
+									<td>
+										{{ basic["qiita_score"] }} 人
+									</td>
+								</tr>
+								<tr>
+									<td>
+										リモート率
+									</td>
+									<td>
+										{{ basic["remote"] }} %
+									</td>
+								</tr>
+								<tr>
+									<td>
+										求人件数
+									</td>
+									<td>
+										{{ basic["count"] }} 件
+									</td>
+								</tr>
+							</table>
+						</div>
+
+
+						<div class="col-xl-12 col-lg-12">
+							<p>
+								{{ md_value }}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+<div class="row">
+
+	<div class="col-xl-12 col-md-12 mb-12">
+		<div class=" py-3">
+			<h6 class="m-0 font-weight-bold text-primary">{{ name }}の総評</h6>
+		</div>
+		<div class="card border-left-success shadow py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col-lg-12 mb-12 col-xl-12 col-md-12">
+						{{ summury }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+<h2 id="money_distribution_graph">{{ name }}の年収分布</h2>
+
+<div class="row">
+	<!-- Area Chart -->
+	<div class="col-xl-12 col-lg-7">
+		<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body">
+				<div class="chart-area">
+					<div class="chartjs-size-monitor">
+						<div class="chartjs-size-monitor-expand">
+							<div class=""></div>
+						</div>
+						<div class="chartjs-size-monitor-shrink">
+							<div class=""></div>
+						</div>
+					</div>
+					<!--                               
+					<canvas id="myAreaChart" style="display: block; height: 320px; width: 571px;" width="1142" height="640" class="chartjs-render-monitor"></canvas>
+					-->
+
+					<div><canvas id="chart1"></canvas></div>
+					<p>
+						{{ md_money_array }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	var backgroundColor = "#1ABB9C" // Green
+	var backgroundGray = 'rgba(33, 37, 41, 0.3)'
+	var label_colors = {
+		"money": "#00204a",
+		"overtime": "#1ABB9C",
+		"qiita_score": "#005792",
+		"remote": "#00bbf0",
+		"count": "#42b883"
+	}
+	// ボタンをクリック
+	window.onload = function () {
+		labels = ['100万', '200万', '300万', '400万', '500万', '600万', '700万', '800万', '900万', '1000万']
+		data1 = {{ money_countlist['lower'] }}
+	data2 = {{ money_countlist['upper'] }}
+	DrawChart(labels, data1, data2); // グラフを再描画
+	DrawPorChart();
+	}
+
+	// グラフ描画処理
+	function DrawChart(labels, data1, data2) {
+		var ctx = document.getElementById('chart1').getContext('2d');
+		window.myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: '下限年収 (件)',
+					data: data1,
+					backgroundColor: label_colors.money
+				}, {
+					label: '上限年収 (件)',
+					data: data2,
+					backgroundColor: label_colors.overtime
+				}]
+			},
+			options: {
+				y: {
+					min: 0,
+					max: 15000,
+				},
+			},
+		});
+	}
+
+	function DrawPorChart() {
+		var LABEL_MASTER = [
+			{
+				"key": "money",
+				"name": "下限年収"
+			},
+			{
+				"key": "overtime",
+				"name": "上限年収"
+			},
+			{
+				"key": "qiita_score",
+				"name": "フォロワー数(Qiita)"
+			},
+			{
+				"key": "remote",
+				"name": "リモート率"
+			},
+			{
+				"key": "count",
+				"name": "求人件数"
+			}
+		]
+		var labelname = "{{ name }}"
+		var score_100 = {{ score_100 }}
+	var data = LABEL_MASTER.map((row) => (Math.round(score_100[row.key])))
+	var labels = LABEL_MASTER.map((row) => row.name)
+
+	var ctx = document.getElementById("abilityChart");
+	var myRadarChart = new Chart(ctx, {
+		type: 'radar',
+		data: {
+			labels: labels,
+			datasets: [{
+				label: labelname,
+				data: data,
+				backgroundColor: backgroundGray,
+				//borderColor: backgroundColor,
+				borderColor: '#1ABB9C',
+				borderWidth: 1
+			}],
+			color: "rgba(33, 37, 41, 0.3)",
+		},
+		options: {
+			elements: {
+				line: {
+					borderWidth: 3
+				}
+			},
+			maintainAspectRatio: false,
+			scale: {
+				ticks: {
+					// 最小値の値を0指定
+					beginAtZero: true,
+					min: 0,
+					stepSize: 20,
+					max: 100,
+					//背景色
+					backgroundColor: 'snow',
+					//グリッドライン
+					grid: {
+						color: '#1ABB9C',
+					},
+					//アングルライン
+					angleLines: {
+						color: '#1ABB9C',
+					},
+					//各項目のラベル
+					pointLabels: {
+						color: '#1ABB9C',
+					},
+				},
+			}
+		}
+	});
+	}
+</script>
+
+
+
+
+<div class="row">
+
+	{% for row in jobs %}
+	<div class="col-12 col-md-12 col-lg-12">
+		<div class="card">
+			<div class="card-header px-4 pt-4">
+				<h5 class="card-title mb-0">{{ row.company }}</h5>
+				<div class="badge bg-primary my-2">{{ row.salary }}</div>
+			</div>
+			<div class="card-body px-4 pt-2">
+				<p>{{ row.title }}</p>
+				<p>{{ row.date }}</p>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+
+
+
+<style>
+	.card-subtitle,
+	.card-title {
+		font-weight: 400;
+	}
+
+	.card-title {
+		font-size: .875rem;
+		color: #495057;
+	}
+
+	.card {
+		margin-bottom: 24px;
+		box-shadow: 0 0 0.875rem 0 rgba(33, 37, 41, .05);
+	}
+
+	.card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		word-wrap: break-word;
+		background-color: #fff;
+		background-clip: initial;
+		border: 0 solid transparent;
+		border-radius: .25rem;
+	}
+
+	.card-body {
+		flex: 1 1 auto;
+		padding: 1.25rem;
+	}
+
+	.card-header:first-child {
+		border-radius: .25rem .25rem 0 0;
+	}
+
+	.card-header {
+		border-bottom-width: 1px;
+	}
+
+	.pb-0 {
+		padding-bottom: 0 !important;
+	}
+
+	.card-header {
+		padding: 1rem 1.25rem;
+		margin-bottom: 0;
+		background-color: #fff;
+		border-bottom: 0 solid transparent;
+	}
+</style>
