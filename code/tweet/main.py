@@ -29,7 +29,7 @@ client = tweepy.Client(
 def create_tweet(content):
     print(content)
     print("test")
-    #client.create_tweet(text=content)
+    client.create_tweet(text=content)
 
 
 
@@ -76,6 +76,7 @@ def search_go_tweet(folderpath):
 		if "done" in content:
 			create_tweet(content.replace("done", ""))
 			move_file(path, "/done/")
+			exit()
 
 
 
