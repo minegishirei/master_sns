@@ -35,9 +35,9 @@ if __name__ == "__main__":
     print(tweet_content)
 
 
-    # # アカウントをランダムに二つ選択
-    # # 選択したアカウントでツイートを行う
-    # tweet_account = random.choice([ohmycat.get_tweepy_client(),matsuki_no_ukiwa.get_tweepy_client() ])
-    # tweet_account = random.choice([ohmycat.get_tweepy_client()])
-    # main.create_tweet(tweet_content, tweet_account)
+    # アカウントをランダムに二つ選択
+    # 選択したアカウントでツイートを行う
+    tweet_account = random.choice([ohmycat.get_tweepy_client(),matsuki_no_ukiwa.get_tweepy_client() ])
+    tweet_account = random.choice([ohmycat.get_tweepy_client()])
+    main.create_tweet(tweet_content, tweet_account)
 
