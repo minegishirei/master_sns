@@ -18,3 +18,4 @@ xmltodict
 groq
 markdown
 tweepy
+google-generativeai

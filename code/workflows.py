@@ -1,4 +1,5 @@
 from chatgpt.main       import run_chatgpt
+from chatgpt.gemini     import run_chatgpt
 import random
 from tweet import main
 from tweet.accounts import matsuki_no_ukiwa, ohmycat
@@ -22,17 +23,21 @@ def get_tweet_prompt(lang_name):
 """
 
 
+
 if __name__ == "__main__":
 	# ツイート内容のドラフトを作る
-    tweet_content = run_chatgpt( get_tweet_prompt( "" ) )
-    draft.create_draft(tweet_content,"/tweets")
+    tweet_content_draft = run_chatgpt( get_tweet_prompt( "" ) )
+    draft.create_draft(tweet_content_draft,"/tweets")
+    print(tweet_content_draft)
 
     # 承認したドラフトから、ツイートする内容を選択。
     tweet_content = draft.fetch_tweet_content_from_draft("/tweets")
     print(tweet_content)
 
+
     # アカウントをランダムに二つ選択
     # 選択したアカウントでツイートを行う
-    tweet_account = random.choice([ohmycat.get_tweepy_client(),matsuki_no_ukiwa.get_tweepy_client() ])
-    main.create_tweet(tweet_content, tweet_account)
+    #tweet_account = random.choice([ohmycat.get_tweepy_client(),matsuki_no_ukiwa.get_tweepy_client() ])
+    #tweet_account = random.choice([ohmycat.get_tweepy_client()])
+    #main.create_tweet(tweet_content, tweet_account)
 
