@@ -4,6 +4,7 @@ import random
 from tweet import main
 from tweet.accounts import matsuki_no_ukiwa, ohmycat
 from tweet import draft
+import fox.main
 
 def get_tweet_prompt(lang_name):
     return f"""
@@ -11,7 +12,7 @@ def get_tweet_prompt(lang_name):
 以下の制約条件と入力文をもとに、ツイート本文のみ出力してください。
 
 制約条件：
-文字数は50文字程度
+文字数は120文字程度
 
 大喜利系・知識系どちらでもOK
 
@@ -24,11 +25,22 @@ def get_tweet_prompt(lang_name):
 
 
 
+
+
 if __name__ == "__main__":
 	# ツイート内容のドラフトを作る
     tweet_content_draft = run_chatgpt( get_tweet_prompt( "" ) )
     draft.create_draft(tweet_content_draft,"/tweets")
     print(tweet_content_draft)
+
+
+    # # foxについたimage
+    # fox_url = fox.main.get_fox_image_url()
+    # print(fox_url)
+    # tweet_content = fox_url + "\n\n" + "https://d2or2g1md9lrqv.cloudfront.net/dashboard.html?node_id=3aa60c9c-4e8a-11f0-b233-313159b6eaad"
+    # tweet_account = random.choice([ohmycat.get_tweepy_client()])
+    # main.create_tweet(tweet_content, tweet_account)
+
 
     # 承認したドラフトから、ツイートする内容を選択。
     tweet_content = draft.fetch_tweet_content_from_draft("/tweets")
@@ -38,6 +50,5 @@ if __name__ == "__main__":
     # アカウントをランダムに二つ選択
     # 選択したアカウントでツイートを行う
     tweet_account = random.choice([ohmycat.get_tweepy_client(),matsuki_no_ukiwa.get_tweepy_client() ])
-    tweet_account = random.choice([ohmycat.get_tweepy_client()])
     main.create_tweet(tweet_content, tweet_account)
 
