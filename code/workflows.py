@@ -50,5 +50,10 @@ if __name__ == "__main__":
     # アカウントをランダムに二つ選択
     # 選択したアカウントでツイートを行う
     tweet_account = random.choice([ohmycat.get_tweepy_client(),matsuki_no_ukiwa.get_tweepy_client() ])
-    main.create_tweet(tweet_content, tweet_account)
-
+    try:
+        main.create_tweet(tweet_content, tweet_account)
+    except Exception as e:
+        import traceback
+        error_msg = traceback.format_exc()
+        print("例外が発生しました:")
+        print(error_msg)
