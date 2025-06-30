@@ -19,3 +19,5 @@ groq
 markdown
 tweepy
 google-generativeai
+pytrends
+GoogleNews
