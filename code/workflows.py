@@ -68,17 +68,17 @@ if __name__ == "__main__":
     draft.create_draft(tweet_content_draft,"/tweets")
     print(tweet_content_draft)
 
-    tweet_content = create_node_from_keyword("猫", {
-        "user_id": "ohmycat",
-        "password": "Mine0114!",
-    })
-    main.create_tweet(tweet_content, ohmycat.get_tweepy_client())
-
-    tweet_content = create_node_from_keyword("統計",{
+    tweet_content = create_node_from_keyword(random.choice(["アニメ", ""]),{
         "user_id": "kawadasatoshi",
         "password": "Mine0114!",
     })
     main.create_tweet(tweet_content, matsuki_no_ukiwa.get_tweepy_client())
+
+    tweet_content = create_node_from_keyword(random.choice(["エンジニア", "プログラミング", "AI"]),{
+        "user_id": "ohmycat",
+        "password": "Mine0114!",
+    })
+    main.create_tweet(tweet_content, ohmycat.get_tweepy_client())
 
     # # 承認したドラフトから、ツイートする内容を選択。
     # tweet_content = draft.fetch_tweet_content_from_draft("/tweets")
