@@ -68,13 +68,13 @@ if __name__ == "__main__":
     draft.create_draft(tweet_content_draft,"/tweets")
     print(tweet_content_draft)
 
-    tweet_content = create_node_from_keyword(random.choice(["アニメ", ""]),{
+    tweet_content = create_node_from_keyword(random.choice(["今だけ","知らなきゃ損","9割が知らない","するだけ","〇選","裏ワザ","最新版","一瞬で","たった1分で","衝撃の事実","バレた","なぜ なのか？","しないでください","【保存版】","本当は教えたくない","○○の真実","無料でできる","専門家が教える","今すぐチェック","した結果…",]),{
         "user_id": "kawadasatoshi",
         "password": "Mine0114!",
     })
     main.create_tweet(tweet_content, matsuki_no_ukiwa.get_tweepy_client())
 
-    tweet_content = create_node_from_keyword(random.choice(["エンジニア", "プログラミング", "AI"]),{
+    tweet_content = create_node_from_keyword(random.choice(["", "ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]),{
         "user_id": "ohmycat",
         "password": "Mine0114!",
     })
