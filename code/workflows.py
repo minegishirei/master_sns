@@ -70,10 +70,11 @@ if __name__ == "__main__":
         "password": "Mine0114!",
     })
     main.create_tweet(tweet_content, matsuki_no_ukiwa.get_tweepy_client())
-    matsuki_no_ukiwa_word_list = ["ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]
-    main.create_tweet(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)), matsuki_no_ukiwa.get_tweepy_client())
+    ohmycat_word_list = ["ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]
+    main.create_tweet(get_tweet_prompt(random.choice(ohmycat_word_list)), matsuki_no_ukiwa.get_tweepy_client())
 
-    tweet_content = create_node_from_keyword(random.choice(matsuki_no_ukiwa_word_list),{
+
+    tweet_content = create_node_from_keyword(random.choice(ohmycat_word_list),{
         "user_id": "ohmycat",
         "password": "Mine0114!",
     })
