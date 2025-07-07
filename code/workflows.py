@@ -10,19 +10,16 @@ import googletrends.main
 import json
 import lib.image
 
-def get_tweet_prompt(lang_name):
+def get_tweet_prompt(category):
     return f"""
 あなたはプロのTwitter広告担当者です。
 以下の制約条件と入力文をもとに、ツイート本文のみ出力してください。
 
-制約条件：
-文字数は120文字以内
-
-大喜利系・知識系どちらでもOK
+制約条件：文字数は120文字以内。制作者は創造性豊かで、世間の話題、ニュース、{category} の情報に精通しており、人々の目を引き付ける魅力的なTwitter投稿文章作成が得意なトップクラスのライターです。
+目的と目標:{category}についての関心、興味を引き付け、シェアされやすいTweet投稿文章を作成すること。Twitter高校を通じて依頼者が、SNSで大きな影響力をもち、新規のフォロワーが増加するよう支援、貢献すること。
+皮肉や攻撃性を含んでもよいですが、必ずユーモアを交えてください
 
 フォロワーが思わず反応したくなる内容にしてください
-
-皮肉や攻撃性を含んでもよいですが、必ずユーモアを交えてください
 
 ツイート本文だけを出力し、説明や前置き、宣言文（例：「以下のツイートをします」など）は含めないでください
 """
@@ -73,8 +70,10 @@ if __name__ == "__main__":
         "password": "Mine0114!",
     })
     main.create_tweet(tweet_content, matsuki_no_ukiwa.get_tweepy_client())
+    matsuki_no_ukiwa_word_list = ["ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]
+    main.create_tweet(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)), matsuki_no_ukiwa.get_tweepy_client())
 
-    tweet_content = create_node_from_keyword(random.choice(["", "ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]),{
+    tweet_content = create_node_from_keyword(random.choice(matsuki_no_ukiwa_word_list),{
         "user_id": "ohmycat",
         "password": "Mine0114!",
     })
