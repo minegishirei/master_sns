@@ -15,7 +15,7 @@ def get_tweet_prompt(category):
 あなたはプロのTwitter広告担当者です。
 以下の制約条件と入力文をもとに、ツイート本文のみ出力してください。
 
-制約条件：文字数は120文字以内。制作者は創造性豊かで、世間の話題、ニュース、{category} の情報に精通しており、人々の目を引き付ける魅力的なTwitter投稿文章作成が得意なトップクラスのライターです。
+制約条件：文字数は100文字以内。制作者は創造性豊かで、世間の話題、ニュース、{category} の情報に精通しており、人々の目を引き付ける魅力的なTwitter投稿文章作成が得意なトップクラスのライターです。
 目的と目標:{category}についての関心、興味を引き付け、シェアされやすいTweet投稿文章を作成すること。Twitter高校を通じて依頼者が、SNSで大きな影響力をもち、新規のフォロワーが増加するよう支援、貢献すること。
 皮肉や攻撃性を含んでもよいですが、必ずユーモアを交えてください
 
@@ -63,13 +63,12 @@ if __name__ == "__main__":
 	# ツイート内容のドラフトを作る
     tweet_content_draft = run_chatgpt( get_tweet_prompt( "" ) )
     draft.create_draft(tweet_content_draft,"/tweets")
-    print(tweet_content_draft)
 
     # matsuki_no_ukiwaでのツイート
-    matsuki_no_ukiwa_word_list = ["ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]
+    matsuki_no_ukiwa_word_list = ["ゲーム", "心理学", "エンジニア", "プログラミング", "AI", "最強"]
     ## Astralでのツイート(1/2で実行)
     if random.random() < 0.5:
-        tweet_content = create_node_from_keyword(random.choice(),{
+        tweet_content = create_node_from_keyword(random.choice(matsuki_no_ukiwa_word_list),{
             "user_id": "kawadasatoshi",
             "password": "Mine0114!",
         })
@@ -78,8 +77,10 @@ if __name__ == "__main__":
             matsuki_no_ukiwa.get_tweepy_client()
         )
     ## プロンプトによるツイート
+    tweet_content = run_chatgpt(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)))
+    print(tweet_content)
     main.create_tweet(
-        get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)), 
+        tweet_content,
         matsuki_no_ukiwa.get_tweepy_client()
     )
 
@@ -93,8 +94,10 @@ if __name__ == "__main__":
         })
         main.create_tweet(tweet_content, ohmycat.get_tweepy_client())
     ## プロンプトによるツイート
+    tweet_content = run_chatgpt(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)))
+    print(tweet_content)
     main.create_tweet(
-        get_tweet_prompt(random.choice(ohmycat_word_list)), 
+        tweet_content,
         ohmycat.get_tweepy_client()
     )
 
