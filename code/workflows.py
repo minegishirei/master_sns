@@ -65,20 +65,38 @@ if __name__ == "__main__":
     draft.create_draft(tweet_content_draft,"/tweets")
     print(tweet_content_draft)
 
-    tweet_content = create_node_from_keyword(random.choice(["今だけ","知らなきゃ損","9割が知らない","するだけ","〇選","裏ワザ","最新版","一瞬で","たった1分で","衝撃の事実","バレた","なぜ なのか？","しないでください","【保存版】","本当は教えたくない","○○の真実","無料でできる","専門家が教える","今すぐチェック","した結果…",]),{
-        "user_id": "kawadasatoshi",
-        "password": "Mine0114!",
-    })
-    main.create_tweet(tweet_content, matsuki_no_ukiwa.get_tweepy_client())
-    ohmycat_word_list = ["ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]
-    main.create_tweet(get_tweet_prompt(random.choice(ohmycat_word_list)), matsuki_no_ukiwa.get_tweepy_client())
+    # matsuki_no_ukiwaでのツイート
+    matsuki_no_ukiwa_word_list = ["ゲーム", "統計データ","心理学", "エンジニア", "プログラミング", "AI"]
+    ## Astralでのツイート(1/2で実行)
+    if random.random() < 0.5:
+        tweet_content = create_node_from_keyword(random.choice(),{
+            "user_id": "kawadasatoshi",
+            "password": "Mine0114!",
+        })
+        main.create_tweet(
+            tweet_content, 
+            matsuki_no_ukiwa.get_tweepy_client()
+        )
+    ## プロンプトによるツイート
+    main.create_tweet(
+        get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)), 
+        matsuki_no_ukiwa.get_tweepy_client()
+    )
 
-
-    tweet_content = create_node_from_keyword(random.choice(ohmycat_word_list),{
-        "user_id": "ohmycat",
-        "password": "Mine0114!",
-    })
-    main.create_tweet(tweet_content, ohmycat.get_tweepy_client())
+    # ohmycatでのツイート
+    ohmycat_word_list = ["今だけ","知らなきゃ損","9割が知らない","するだけ","〇選","裏ワザ","最新版","一瞬で","たった1分で","衝撃の事実","バレた","なぜ なのか？","しないでください","【保存版】","本当は教えたくない","○○の真実","無料でできる","専門家が教える","今すぐチェック","した結果…",]
+    ## Astralでのツイート(1/2で実行)
+    if random.random() < 0.5:
+        tweet_content = create_node_from_keyword(random.choice(ohmycat_word_list),{
+            "user_id": "ohmycat",
+            "password": "Mine0114!",
+        })
+        main.create_tweet(tweet_content, ohmycat.get_tweepy_client())
+    ## プロンプトによるツイート
+    main.create_tweet(
+        get_tweet_prompt(random.choice(ohmycat_word_list)), 
+        ohmycat.get_tweepy_client()
+    )
 
     # # 承認したドラフトから、ツイートする内容を選択。
     # tweet_content = draft.fetch_tweet_content_from_draft("/tweets")
