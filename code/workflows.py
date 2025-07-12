@@ -57,18 +57,46 @@ def create_node_from_keyword(keyword,user):
 https://d2or2g1md9lrqv.cloudfront.net/dashboard.html?node_id={new_node_dict["node_id"]}
 """
 
+prog_langs = [
+    "Python", "JavaScript", "Java", "C", "C++", "C#", "Go", "Ruby", "PHP", "Swift",
+    "Kotlin", "Rust", "TypeScript", "Scala", "Perl", "Lua", "Haskell", "Objective‑C",
+    "Dart", "MATLAB", "R", "SQL", "Visual Basic", "Pascal", "Fortran", "Shell",
+    "PowerShell", "Groovy", "Elixir", "Erlang", "Julia", "F#", "COBOL", "Assembly",
+    "Prolog", "Ada", "Lisp", "Scheme", "OCaml", "Crystal", "VBA", "Delphi", "Bash",
+    "Scratch", "SAS", "ABAP", "RPG", "Q#", "LabVIEW", "Logo"
+]
+aws_services = [
+    "EC2", "S3", "EBS", "EFS", "Lambda", "Elastic Beanstalk", "VPC", "Route 53",
+    "CloudFront", "RDS", "DynamoDB", "Redshift", "Aurora", "Glue", "CloudFormation",
+    "ECS", "EKS", "Fargate", "SQS", "SNS", "SES", "CloudWatch", "CloudTrail",
+    "IAM", "KMS", "Athena", "Kinesis", "API Gateway", "Step Functions", "Snowball",
+    "Inspector", "Security Hub", "GuardDuty", "AppFlow", "Managed Blockchain",
+    "Elasticsearch Service", "QuickSight", "MSK", "Pinpoint", "Device Farm",
+    "CodeCommit", "CodePipeline", "CodeDeploy", "Cloud9", "DataSync", "Lake Formation",
+    "MQ", "Managed Airflow", "Cognito", "Direct Connect"
+]
+dev_methods = [
+    "ウォーターフォール", "アジャイル", "スクラム", "カンバン", "XP", "リーン開発",
+    "DevOps", "CI/CD", "テスト駆動開発（TDD）", "BDD", "ペアプログラミング",
+    "コードレビュー", "リファクタリング", "継続的インテグレーション", "継続的デリバリー",
+    "継続的デプロイメント", "モブプログラミング", "プロトタイピング", "UAT", "ユースケース駆動開発",
+    "ドメイン駆動設計（DDD）", "マイクロサービス", "サーバーレスアーキテクチャ",
+    "イベント駆動アーキテクチャ", "SCRUM-ban", "スパイラルモデル", "RAD", "プロジェクトマネジメント",
+    "リスク管理", "品質保証（QA）", "バージョン管理", "Gitフロー", "ブランチ戦略", "CIパイプライン",
+    "自動テスト", "性能テスト", "負荷テスト", "セキュリティテスト", "コードカバレッジ",
+    "ドキュメント駆動開発", "ウォークスルー", "レビュー会議", "設計パターン",
+    "アーキテクチャレビュー", "インフラストラクチャ as Code（IaC）", "モニタリング"
+]
+
 
 
 if __name__ == "__main__":
-	# ツイート内容のドラフトを作る
-    tweet_content_draft = run_chatgpt( get_tweet_prompt( "" ) )
-    draft.create_draft(tweet_content_draft,"/tweets")
-
     # matsuki_no_ukiwaでのツイート
-    matsuki_no_ukiwa_word_list = ["ゲーム", "心理学", "エンジニア", "プログラミング", "AI", "最強"]
+    matsuki_no_ukiwa_word_list = prog_langs + aws_services + dev_methods
     ## Astralでのツイート(1/2で実行)
-    if random.random() < 0.5:
-        tweet_content = create_node_from_keyword(random.choice(matsuki_no_ukiwa_word_list),{
+    keyword = random.choice(matsuki_no_ukiwa_word_list)
+    if random.random() < 0.1:
+        tweet_content = create_node_from_keyword(keyword,{
             "user_id": "kawadasatoshi",
             "password": "Mine0114!",
         })
@@ -76,19 +104,24 @@ if __name__ == "__main__":
             tweet_content, 
             matsuki_no_ukiwa.get_tweepy_client()
         )
-    ## プロンプトによるツイート
-    tweet_content = run_chatgpt(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)))
-    print(tweet_content)
+    google_trend_content = googletrends.main.fetch_news(keyword)[0]
     main.create_tweet(
-        tweet_content,
+        run_chatgpt(get_tweet_prompt()), 
         matsuki_no_ukiwa.get_tweepy_client()
     )
+        
+    # ## プロンプトによるツイート
+    # tweet_content = run_chatgpt(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)))
+    # print(tweet_content)
+    # main.create_tweet(
+    #     tweet_content,
+    #     matsuki_no_ukiwa.get_tweepy_client()
+    # )
 
     # ohmycatでのツイート
-    ohmycat_word_list = ["今だけ","知らなきゃ損","9割が知らない","するだけ","〇選","裏ワザ","最新版","一瞬で","たった1分で","衝撃の事実","バレた","なぜ なのか？","しないでください","【保存版】","本当は教えたくない","○○の真実","無料でできる","専門家が教える","今すぐチェック","した結果…",]
     ## Astralでのツイート(1/2で実行)
-    if random.random() < 0.5:
-        tweet_content = create_node_from_keyword(random.choice(ohmycat_word_list),{
+    if random.random() < 0.1:
+        tweet_content = create_node_from_keyword(random.choice(matsuki_no_ukiwa_word_list),{
             "user_id": "ohmycat",
             "password": "Mine0114!",
         })
