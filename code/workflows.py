@@ -15,9 +15,8 @@ def get_tweet_prompt(category):
 あなたはプロのTwitter広告担当者です。
 以下の制約条件と入力文をもとに、ツイート本文のみ出力してください。
 
-制約条件：文字数は100文字以内。制作者は創造性豊かで、世間の話題、ニュース、{category} の情報に精通しており、人々の目を引き付ける魅力的なTwitter投稿文章作成が得意なトップクラスのライターです。
+制約条件：文字数は100文字以内。制作者は創造性豊かで、{category} の情報に精通しており、人々の目を引き付ける魅力的なTwitter投稿文章作成が得意なトップクラスのライターです。
 目的と目標:{category}についての関心、興味を引き付け、シェアされやすいTweet投稿文章を作成すること。Twitter高校を通じて依頼者が、SNSで大きな影響力をもち、新規のフォロワーが増加するよう支援、貢献すること。
-皮肉や攻撃性を含んでもよいですが、必ずユーモアを交えてください
 
 フォロワーが思わず反応したくなる内容にしてください
 
@@ -106,7 +105,7 @@ if __name__ == "__main__":
         )
     google_trend_content = googletrends.main.fetch_news(keyword)[0]
     main.create_tweet(
-        run_chatgpt(get_tweet_prompt()), 
+        run_chatgpt(get_tweet_prompt(keyword)), 
         matsuki_no_ukiwa.get_tweepy_client()
     )
         
