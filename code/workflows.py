@@ -10,6 +10,19 @@ import googletrends.main
 import json
 import lib.image
 
+def get_tweet_prompt_from_google(contents):
+    return f"""
+あなたはプロのTwitter広告担当者です。
+以下の制約条件と入力文をもとに、ツイート本文のみ出力してください。
+
+制約条件：文字数は100文字以内。魅力的なTwitter投稿文章作成が得意なトップクラスのライターです。
+目的と目標:興味を引き付け、シェアされやすいTweet投稿文章を作成すること。
+内容: {contents}
+
+ツイート本文だけを出力し、説明や前置き、宣言文（例：「以下のツイートをします」など）は含めないでください
+"""
+
+
 def get_tweet_prompt(category):
     return f"""
 あなたはプロのTwitter広告担当者です。
@@ -103,11 +116,17 @@ if __name__ == "__main__":
             tweet_content, 
             matsuki_no_ukiwa.get_tweepy_client()
         )
-    google_trend_content = googletrends.main.fetch_news(keyword)[0]
-    main.create_tweet(
-        run_chatgpt(get_tweet_prompt(keyword)), 
-        matsuki_no_ukiwa.get_tweepy_client()
-    )
+    for row in  googletrends.main.fetch_news(keyword):
+        if len(row["title"]) > 30:
+            #text = run_chatgpt( get_tweet_prompt_from_google(row["title"]) )
+            print(row["title"])
+            main.create_tweet(
+                row["title"], 
+                matsuki_no_ukiwa.get_tweepy_client()
+            )
+            break
+
+
         
     # ## プロンプトによるツイート
     # tweet_content = run_chatgpt(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list)))
