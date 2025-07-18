@@ -125,7 +125,11 @@ if __name__ == "__main__":
                 matsuki_no_ukiwa.get_tweepy_client()
             )
             break
-
+    if random.random() < 0.5:
+        main.create_tweet(
+            run_chatgpt(get_tweet_prompt(random.choice(matsuki_no_ukiwa_word_list))), 
+            matsuki_no_ukiwa.get_tweepy_client()
+        )
 
         
     # ## プロンプトによるツイート
