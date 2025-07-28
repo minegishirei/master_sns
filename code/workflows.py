@@ -102,11 +102,12 @@ dev_methods = [
 
 
 
-if __name__ == "__main__":
+if False:
     # matsuki_no_ukiwaでのツイート
     matsuki_no_ukiwa_word_list = prog_langs + aws_services + dev_methods
     ## Astralでのツイート(1/2で実行)
     keyword = random.choice(matsuki_no_ukiwa_word_list)
+
     if random.random() < 0.1:
         tweet_content = create_node_from_keyword(keyword,{
             "user_id": "kawadasatoshi",
@@ -155,17 +156,3 @@ if __name__ == "__main__":
         tweet_content,
         ohmycat.get_tweepy_client()
     )
-
-    # # 承認したドラフトから、ツイートする内容を選択。
-    # tweet_content = draft.fetch_tweet_content_from_draft("/tweets")
-    # print(tweet_content)
-    # # アカウントをランダムに二つ選択
-    # # 選択したアカウントでツイートを行う
-    # tweet_account = random.choice([ohmycat.get_tweepy_client(),matsuki_no_ukiwa.get_tweepy_client() ])
-    # try:
-    #     main.create_tweet(tweet_content, tweet_account)
-    # except Exception as e:
-    #     import traceback
-    #     error_msg = traceback.format_exc()
-    #     print("例外が発生しました:")
-    #     print(error_msg)
