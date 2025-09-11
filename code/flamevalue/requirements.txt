@@ -8,7 +8,7 @@ oauth2client
 gspread
 django-hosts
 mysqlclient
-mysql-connector-python==8.0.29
+mysql-connector-python==9.1.0
 PyGithub
 #google-ads
 markdown
